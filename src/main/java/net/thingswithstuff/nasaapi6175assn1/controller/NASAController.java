@@ -1,6 +1,7 @@
 package net.thingswithstuff.nasaapi6175assn1.controller;
 
 import net.thingswithstuff.nasaapi6175assn1.APOD;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
@@ -13,6 +14,8 @@ import java.util.List;
 @RestController
 public class NASAController {
     private static final String requestURL = "https://api.nasa.gov/planetary/apod";
+    @Value("${apod.api.key}")
+    private String defaultKey;
 
     @GetMapping("/NASA_APOD")
     public List<APOD> NASA_APOD(
@@ -26,7 +29,7 @@ public class NASAController {
         final RestTemplate template = new RestTemplate();
         final String url = String.format("%s%s%s%s%s%s%s",
                 requestURL,
-                api_key != null ? String.format("?api_key=%s", api_key) : "",
+                String.format("?api_key=%s", api_key != null ? api_key : defaultKey),
                 date != null ? String.format("&date=%s", date) : "",
                 start_date != null ? String.format("&start_date=%s", start_date) : "",
                 end_date != null ? String.format("&end_date=%s", end_date) : "",
