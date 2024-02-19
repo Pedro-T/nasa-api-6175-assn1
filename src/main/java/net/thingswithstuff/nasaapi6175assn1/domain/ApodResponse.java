@@ -1,11 +1,11 @@
-package net.thingswithstuff.nasaapi6175assn1;
+package net.thingswithstuff.nasaapi6175assn1.domain;
 
 import lombok.Getter;
 import lombok.Setter;
 
 @Getter
 @Setter
-public class APOD {
+public class ApodResponse {
     private String copyright;
     private String date;
     private String explanation;
